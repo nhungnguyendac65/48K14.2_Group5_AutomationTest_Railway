@@ -23,11 +23,9 @@ public class TC14 extends BaseTest {
 
         BookTicketPage bookTicketPage = homePage.gotoBookTicketPage();
 
-        // Lấy ngày hiện tại và cộng thêm 4 ngày
         LocalDate currentDate = LocalDate.now().plusDays(4);
         String departDate = currentDate.format(DateTimeFormatter.ofPattern("M/d/yyyy"));
 
-        // Chọn ngày đi
         bookTicketPage.selectDepartDate(departDate);
         bookTicketPage.selectDepartFrom("Sài Gòn");
         bookTicketPage.selectArriveStation("Nha Trang");
@@ -35,12 +33,10 @@ public class TC14 extends BaseTest {
         bookTicketPage.selectTicketAmount("1");
         bookTicketPage.clickBookTicketButton();
 
-        // Kiểm tra thông báo thành công
         String expectedMsg = "Ticket booked successfully!";
         String actualMsg = bookTicketPage.getLblBookTicketSuccessMsg().getText();
         Assert.assertEquals(actualMsg, expectedMsg, "Success message doesn't match");
 
-        // Kiểm tra thông tin đặt vé
         List<String> bookingInfo = bookTicketPage.getBookingInformation();
         String expectedDepartDate = currentDate.format(DateTimeFormatter.ofPattern("M/d/yyyy"));
         List<String> expectedInfo = Arrays.asList("Sài Gòn", "Nha Trang", "Soft bed with air conditioner", expectedDepartDate, "1");

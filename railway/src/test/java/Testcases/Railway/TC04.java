@@ -20,7 +20,6 @@ public class TC04 extends BaseTest {
         }
         homePage.gotoBookTicketPage();
 
-        // Kiểm tra xem trang đăng nhập có hiển thị không
         boolean isLoginPageDisplayed = true;
         try {
             WebElement usernameTextbox = Constant.WEBDRIVER.findElement(By.id("username"));
@@ -30,11 +29,9 @@ public class TC04 extends BaseTest {
             isLoginPageDisplayed = usernameTextbox.isDisplayed() && passwordTextbox.isDisplayed() && loginButton.isDisplayed();
         }
         catch (NoSuchElementException e) {
-            // Nếu không tìm thấy các phần tử của trang đăng nhập, thì trang không hiển thị
             isLoginPageDisplayed = false;
         }
 
-        // Kiểm tra xem trang đăng nhập có hiển thị sau khi nhấn vào tab "Book ticket" không
         Assert.assertFalse(isLoginPageDisplayed, "Login page is not displayed when un-logged User clicks on 'Book ticket' tab");
         Thread.sleep(5000);
     }
